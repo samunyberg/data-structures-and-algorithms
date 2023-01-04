@@ -63,6 +63,17 @@ public class Array {
         return max;
     }
 
+    public Array intersect(Array other) {
+        var intersection = new Array(count);
+
+        for (int item : items) {
+            if (other.indexOf(item) >= 0)
+                intersection.insert(item);
+        }
+
+        return intersection;
+    }
+
     private void resizeIfRequired() {
         if (items.length == count) {
             var newItems = new int[count * 2];
