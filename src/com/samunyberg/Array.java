@@ -9,16 +9,22 @@ public class Array {
     }
 
     public void insert(int item) {
-        if (items.length == count) {
-            var newItems = new int[count * 2];
-
-            for (int i = 0; i < count; i++)
-                newItems[i] = items[i];
-
-            items = newItems;
-        }
+        resizeIfRequired();
 
         items[count++] = item;
+    }
+
+    public void insertAt(int item, int index) {
+        if (index < 0 || index >= count)
+            throw new IllegalArgumentException();
+
+        resizeIfRequired();
+
+        for (int i = count - 1; i >= index; i--)
+            items[i + 1] = items[i];
+
+        items[index] = item;
+        count++;
     }
 
     public void removeAt(int index) {
@@ -55,6 +61,17 @@ public class Array {
         }
 
         return max;
+    }
+
+    private void resizeIfRequired() {
+        if (items.length == count) {
+            var newItems = new int[count * 2];
+
+            for (int i = 0; i < count; i++)
+                newItems[i] = items[i];
+
+            items = newItems;
+        }
     }
 
     public void print() {
