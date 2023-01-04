@@ -39,8 +39,17 @@ public class Array {
         return -1;
     }
 
+    public void reverse() {
+        int[] newItems = new int[count];
+        for (int i = 0; i < count; i++) {
+            newItems[i] = items[count - i - 1];
+        }
+        items = newItems;
+    }
+
     public void print() {
         for (int i = 0; i < count; i++)
             System.out.println(items[i]);
     }
 }
+// [10, 20, 30]
