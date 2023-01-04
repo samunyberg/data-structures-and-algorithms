@@ -52,4 +52,3 @@ public class Array {
             System.out.println(items[i]);
     }
 }
-// [10, 20, 30]
