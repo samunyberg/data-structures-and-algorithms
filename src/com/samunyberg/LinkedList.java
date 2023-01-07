@@ -160,6 +160,24 @@ public class LinkedList {
             System.out.println(pointer1.value + ", " + pointer1.next.value);
     }
 
+    public boolean hasLoop() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var slow = first;
+        var fast = first;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (fast == slow)
+                return true;
+        }
+
+        return false;
+    }
+
     public int[] toArray() {
         int[] array = new int[size];
         var current = first;
