@@ -143,6 +143,23 @@ public class LinkedList {
         return pointer1.value;
     }
 
+    public void printMiddle() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var pointer1 = first;
+        var pointer2 = first;
+        while (pointer2 != last && pointer2.next != last) {
+            pointer2 = pointer2.next.next;
+            pointer1 = pointer1.next;
+        }
+
+        if (pointer2 == last)
+            System.out.println(pointer1.value);
+        else
+            System.out.println(pointer1.value + ", " + pointer1.next.value);
+    }
+
     public int[] toArray() {
         int[] array = new int[size];
         var current = first;
