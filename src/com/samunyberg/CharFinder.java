@@ -1,6 +1,7 @@
 package com.samunyberg;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class CharFinder {
     public char findFirstNonRepeatingChar(String str) {
@@ -15,6 +16,19 @@ public class CharFinder {
         for (var ch : array) {
             if (map.get(ch) == 1)
                 return ch;
+        }
+
+        return Character.MIN_VALUE;
+    }
+
+    public char findFirstRepeatingChar(String str) {
+        var set = new HashSet<Character>();
+
+        for (var ch : str.toCharArray()) {
+            if (set.contains(ch))
+                return ch;
+
+            set.add(ch);
         }
 
         return Character.MIN_VALUE;
