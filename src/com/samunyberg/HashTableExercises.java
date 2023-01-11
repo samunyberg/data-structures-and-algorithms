@@ -1,6 +1,7 @@
 package com.samunyberg;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class HashTableExercises {
     public static int mostFrequent(int[] numbers) {
@@ -21,5 +22,22 @@ public class HashTableExercises {
         }
 
         return result;
+    }
+
+    public static int countPairsWithDiff(int[] numbers, int difference) {
+        var set = new HashSet<Integer>();
+        for (var number : numbers)
+            set.add(number);
+
+        var count = 0;
+        for (var number : numbers) {
+            if (set.contains(number + difference))
+                count++;
+            if (set.contains(number - difference))
+                count++;
+            set.remove(number);
+        }
+
+        return count;
     }
 }
