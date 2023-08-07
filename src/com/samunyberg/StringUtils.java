@@ -1,8 +1,6 @@
 package com.samunyberg;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class StringUtils {
     public static int countVowels(String str) {
@@ -46,5 +44,22 @@ public class StringUtils {
             return false;
 
         return (str1.length() == str2.length() && (str1 + str1).contains(str2));
+    }
+
+    public static String removeDuplicates(String str) {
+        if (str == null)
+            return "";
+
+        StringBuilder output = new StringBuilder();
+        Set<Character> seen = new HashSet<>();
+
+        for (var ch : str.toCharArray()) {
+            if (!seen.contains(ch)) {
+                seen.add(ch);
+                output.append(ch);
+            }
+        }
+
+        return output.toString();
     }
 }
