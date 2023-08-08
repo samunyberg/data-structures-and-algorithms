@@ -62,4 +62,29 @@ public class StringUtils {
 
         return output.toString();
     }
+
+    public static char getMaxOccuringChar(String str) {
+        if (str == null || str.isEmpty())
+            throw new IllegalArgumentException();
+
+        Map<Character, Integer> frequencies = new HashMap<>();
+
+        for (var ch : str.toCharArray()) {
+            if (frequencies.containsKey(ch))
+                frequencies.replace(ch, frequencies.get(ch) + 1);
+            else
+                frequencies.put(ch, 1);
+        }
+
+        int max = 0;
+        char result = ' ';
+        for (var ch : frequencies.keySet()) {
+            if (frequencies.get(ch) > max) {
+                max = frequencies.get(ch);
+                result = ch;
+            }
+        }
+
+        return result;
+    }
 }
