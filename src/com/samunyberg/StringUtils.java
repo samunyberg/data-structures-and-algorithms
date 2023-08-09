@@ -87,4 +87,21 @@ public class StringUtils {
 
         return result;
     }
+
+    public static String capitalize(String sentence) {
+        if (sentence == null || sentence.trim().isEmpty())
+            return "";
+
+        var words = sentence
+                .trim()
+                .replaceAll(" +", " ")
+                .split(" ");
+
+        for (var i = 0; i < words.length; i++) {
+            words[i] = words[i].substring(0, 1).toUpperCase()
+                    + words[i].substring(1).toLowerCase();
+        }
+
+        return String.join(" ", words);
+    }
 }
