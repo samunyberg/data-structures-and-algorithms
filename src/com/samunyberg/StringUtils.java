@@ -117,4 +117,28 @@ public class StringUtils {
 
         return Arrays.equals(array1, array2);
     }
+
+    public static boolean areAnagrams2(String first, String second) {
+        if (first == null || second == null || first.length() != second.length())
+            return false;
+
+        final int ENGLISH_ALPHABET_SIZE = 26;
+        int[] frequencies = new int[ENGLISH_ALPHABET_SIZE];
+
+        first = first.toLowerCase();
+        for (var i = 0; i < first.length(); i++) {
+            frequencies[first.charAt(i) - 'a']++;
+        }
+
+        second = second.toLowerCase();
+        for (var i = 0; i < second.length(); i++) {
+            var index = second.charAt(i) - 'a';
+            if (frequencies[index] == 0)
+                return false;
+
+            frequencies[index]--;
+        }
+
+        return true;
+    }
 }
