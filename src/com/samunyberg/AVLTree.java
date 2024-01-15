@@ -36,13 +36,21 @@ public class AVLTree {
                 height(root.leftChild),
                 height(root.rightChild)) + 1;
 
-        var balanceFactor = balanceFactor(root);
-        if (isLeftHeavy(root))
-            System.out.println(root.value + " is left-heavy");
-        else if (isRightHeavy(root))
-            System.out.println(root.value + " is right-heavy");
+        balance(root);
 
         return root;
+    }
+
+    private void balance(AVLNode root) {
+        if (isLeftHeavy(root)) {
+            if (balanceFactor(root.leftChild) < 0)
+                System.out.println("Left Rotate on " + root.leftChild.value);
+            System.out.println("Right rotate on " + root.value);
+        } else if (isRightHeavy(root)) {
+            if (balanceFactor(root.rightChild) > 0)
+                System.out.println("Right Rotate on " + root.rightChild.value);
+            System.out.println("Left Rotate on " + root.value);
+        }
     }
 
     private boolean isLeftHeavy(AVLNode node) {
