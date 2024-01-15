@@ -95,6 +95,24 @@ public class Tree {
         traversePreOrder(root.rightChild);
         System.out.println(root.value);
     }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node root) {
+        if (root == null)
+            return -1;
+
+        if (isLeaf(root))
+            return 0;
+
+        return 1 + Math.max(height(root.leftChild), height(root.rightChild));
+    }
+
+    private boolean isLeaf(Node node) {
+        return node.leftChild == null && node.rightChild == null;
+    }
 }
 
 
