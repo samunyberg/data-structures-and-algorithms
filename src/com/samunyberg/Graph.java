@@ -1,9 +1,7 @@
 package com.samunyberg;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.Stack;
 
 public class Graph {
     private class Node {
@@ -57,7 +55,7 @@ public class Graph {
             adjacencyList.get(n).remove(node);
 
         adjacencyList.remove(node);
-        nodes.remove(node);
+        nodes.remove(node.label);
     }
 
     public void removeEdge(String from, String to) {
@@ -68,5 +66,73 @@ public class Graph {
             return;
 
         adjacencyList.get(fromNode).remove(toNode);
+    }
+
+    public void traverseDepthFirstRec(String root) {
+        var node = nodes.get(root);
+        if (node == null)
+            return;
+
+        traverseDepthFirstRec(node, new HashSet<>());
+    }
+
+    private void traverseDepthFirstRec(Node root, Set<Node> visited) {
+        System.out.println(root);
+        visited.add(root);
+
+        for (var node : adjacencyList.get(root)) {
+            if (!visited.contains(node))
+                traverseDepthFirstRec(node, visited);
+        }
+    }
+
+    public void traverseDepthFirst(String root) {
+        var node = nodes.get(root);
+        if (node == null)
+            return;
+
+        Set<Node> visited = new HashSet<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            var current = stack.pop();
+
+            if (visited.contains(node))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+
+            for (var neighbour : adjacencyList.get(current))
+                if (!visited.contains(neighbour))
+                    stack.push(neighbour);
+        }
+    }
+
+    public void traverseBreadthFirst(String root) {
+        var node = nodes.get(root);
+        if (node == null)
+            return;
+
+        Set<Node> visited = new HashSet<>();
+
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            var current = queue.remove();
+
+            if (visited.contains(node))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+
+            for (var neighbour : adjacencyList.get(current))
+                if (!visited.contains(neighbour))
+                    queue.add(neighbour);
+        }
     }
 }
